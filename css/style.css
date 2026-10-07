@@ -574,6 +574,9 @@ tbody tr:hover { background: rgba(255,255,255,.035); }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .section { padding: 56px 0; }
   .section-title { font-size: 1.7rem; }
+  .footer { padding: 48px 0 20px; }
+  .footer-grid { gap: 24px; margin-bottom: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
   .mobile-lang { margin-top: auto; padding: 12px; border-top: 1px solid var(--bg-3); flex-shrink: 0; }
   .mobile-lang .lang-switch { display: block; text-align: center; border: 1px solid var(--glass-border); }
 }
@@ -590,6 +593,11 @@ tbody tr:hover { background: rgba(255,255,255,.035); }
   .market-toolbar { gap: 12px; }
   .market-search { flex: 1 1 100%; }
   .market-search input { flex: 1; min-width: 0; }
+  .footer { padding: 40px 0 16px; }
+  .footer-grid { gap: 20px; margin-bottom: 24px; }
+  .footer-col h4 { margin-bottom: 10px; }
+  .footer-col a { margin-bottom: 8px; }
+  .footer-bottom { font-size: 0.8rem; padding-top: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
