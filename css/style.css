@@ -160,53 +160,79 @@ ul { list-style: none; }
     radial-gradient(ellipse 44% 30% at 22% 2%, rgba(56, 107, 219, 0.15), transparent 62%),
     radial-gradient(ellipse 80% 54% at 52% 8%, rgba(56, 107, 219, 0.07), transparent 64%);
 }
-/* Hero geometric colour-block decoration — geometry traced from the customer reference:
-   (1) top-left  tech-blue folded wedge     (2) left  soft blue depth facet
-   (3) top-right champagne corner facet     (4) right champagne folded ribbon (chevron)
-   (5) bottom-right faint blue plane */
+/* Hero geometric colour blocks — "folded plane" language traced from the customer reference:
+   every block is a hard-creased two-tone facet (lit face + shaded face) with a specular
+   bevel along its lit edge. Edges stay crisp; shapes are large and cropped by the viewport. */
 .hero-decor { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .hero-decor .hd { position: absolute; display: block; }
 
-/* 1 — top-left tech-blue wedge: right edge is a vertical fold */
+/* 1 — top-left tech-blue wedge: lit top edge folding into a vertical right edge.
+   Geometry measured off the reference: top edge slope 0.667, fold edge at x≈108,
+   brightness highest just under the top edge and fading downward. */
 .hd-l1 {
-  top: 42px; left: 0; width: 108px; height: 300px;
-  background: linear-gradient(100deg,
-    rgba(56, 107, 219, 0.22) 0%,
-    rgba(56, 107, 219, 0.38) 56%,
-    rgba(56, 107, 219, 0.26) 100%);
-  clip-path: polygon(0 0, 100% 12%, 100% 60%, 0 100%);
+  top: 38px; left: 0; width: 108px; height: 260px;
+  background: linear-gradient(146deg,
+    rgba(56, 107, 219, 0.28) 0%,
+    rgba(56, 107, 219, 0.16) 46%,
+    rgba(56, 107, 219, 0.05) 100%);
+  clip-path: polygon(0 0, 100% 28%, 100% 81%, 0 100%);
 }
-/* 2 — soft blue depth facet, tucked under the wedge */
-.hd-l2 {
-  top: 214px; left: 0; width: 84px; height: 288px;
-  background: linear-gradient(104deg, rgba(56, 107, 219, 0.10) 0%, rgba(56, 107, 219, 0.19) 60%, rgba(56, 107, 219, 0.08) 100%);
-  clip-path: polygon(0 0, 100% 22%, 100% 100%, 0 78%);
+.hd-l1::after {                               /* specular bevel along the lit top edge */
+  content: ""; position: absolute; left: -4%; top: 1px; width: 110%; height: 2px;
+  background: linear-gradient(90deg,
+    rgba(198, 219, 255, 0.03) 0%,
+    rgba(198, 219, 255, 0.42) 100%);
+  transform: rotate(33.7deg); transform-origin: 0 0;
 }
 
-/* 3 — top-right champagne corner facet */
-.hd-r1 {
-  top: 26px; right: 0; width: 170px; height: 134px;
-  background: linear-gradient(208deg,
-    rgba(240, 222, 178, 0.58) 0%,
-    rgba(216, 181, 106, 0.30) 48%,
-    rgba(190, 156, 88, 0.08) 100%);
-  clip-path: polygon(100% 0, 100% 100%, 0 58%);
+/* 2 — shaded depth facet continuing below the wedge */
+.hd-l2 {
+  top: 282px; left: 0; width: 92px; height: 230px;
+  background: linear-gradient(112deg,
+    rgba(56, 107, 219, 0.07) 0%,
+    rgba(56, 107, 219, 0.01) 100%);
+  clip-path: polygon(0 0, 100% 26%, 100% 100%, 0 74%);
 }
+
+/* 3 — top-right champagne diagonal band */
+.hd-r1 {
+  top: 26px; right: 0; width: 186px; height: 142px;
+  background: linear-gradient(200deg,
+    rgba(216, 181, 106, 0.26) 0 20%,      /* lit strip */
+    rgba(150, 124, 72, 0.06) 20% 100%);   /* shaded body */
+  clip-path: polygon(100% 0, 100% 54%, 0 100%, 0 46%);
+}
+.hd-r1::after {                               /* bevel along its lit edge */
+  content: ""; position: absolute; left: 0; top: 65px; width: 100%; height: 2px;
+  background: linear-gradient(90deg,
+    rgba(244, 228, 188, 0.08) 0%,
+    rgba(244, 228, 188, 0.60) 100%);
+  transform: rotate(-19.7deg); transform-origin: 0 0;
+}
+
 /* 4 — champagne folded ribbon pointing left (chevron) */
 .hd-r2 {
   top: 190px; right: 0; width: 196px; height: 252px;
   background: linear-gradient(96deg,
-    rgba(240, 222, 178, 0.46) 0%,
-    rgba(216, 181, 106, 0.24) 58%,
-    rgba(190, 156, 88, 0.07) 100%);
+    rgba(216, 181, 106, 0.15) 0%,
+    rgba(190, 156, 88, 0.05) 100%);       /* shaded lower arm */
   clip-path: polygon(0 46%, 44% 4%, 100% 4%, 56% 50%, 100% 96%, 44% 96%);
 }
+.hd-r2::before {                              /* lit upper arm */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(96deg,
+    rgba(240, 222, 178, 0.32) 0%,
+    rgba(216, 181, 106, 0.10) 100%);
+  clip-path: polygon(0 46%, 44% 4%, 100% 4%, 56% 50%);
+}
 
-/* 5 — faint blue plane anchoring the lower right */
+/* 5 — lighter navy facet at the lower right, with a vertical fold */
 .hd-r3 {
-  top: 330px; right: 96px; width: 340px; height: 230px;
-  background: linear-gradient(168deg, rgba(56, 107, 219, 0.11) 0%, rgba(56, 107, 219, 0.02) 100%);
-  clip-path: polygon(0 0, 100% 24%, 100% 100%, 0 70%);
+  top: 300px; right: 0; width: 150px; height: 300px;
+  background: linear-gradient(180deg,
+    rgba(56, 107, 219, 0.08) 0%,
+    rgba(56, 107, 219, 0.01) 100%);
+  clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);
 }
 .hero > .container { position: relative; z-index: 1; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
@@ -620,7 +646,7 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .download-content { max-width: 100%; }
   .hero { padding: 64px 0 56px; }
   .hero h1 { font-size: 2.2rem; }
-  .hero-decor { opacity: .6; }
+  .hero-decor { opacity: .8; }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .section { padding: 56px 0; }
@@ -634,12 +660,13 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .container { padding: 0 16px; }
   .grid-4 { grid-template-columns: 1fr; }
   .hero h1 { font-size: 1.9rem; }
-  .hero-decor { opacity: .45; }
-  .hd-l1 { width: 78px; height: 210px; top: 60px; }
-  .hd-l2 { width: 56px; height: 190px; top: 190px; }
-  .hd-r1 { width: 104px; height: 84px; top: 24px; }
-  .hd-r2 { width: 132px; height: 180px; top: 132px; }
-  .hd-r3 { display: none; }
+  .hero-decor { opacity: .85; }
+  .hd-l1 { width: 78px; height: 214px; top: 30px; }
+  .hd-l2 { width: 64px; height: 186px; top: 212px; }
+  .hd-r1 { width: 108px; height: 84px; top: 20px; }
+  .hd-r2 { width: 130px; height: 172px; top: 132px; }
+  .hd-r3 { width: 90px; height: 190px; top: 230px; }
+  .hd-l1::after, .hd-r1::after { display: none; }
   .hero-actions { flex-direction: column; }
   .btn { width: 100%; }
   .hero-badges { gap: 16px; }
