@@ -252,6 +252,20 @@ ul { list-style: none; }
 .card h3 { font-size: 1.15rem; margin-bottom: 10px; }
 .card p { font-size: 0.95rem; color: var(--text-muted); }
 
+/* Red + blue accents on card & feature icons — gold stays the primary brand color */
+.grid-4 .card:nth-child(3n+2) .card-icon,
+.grid-3 .card:nth-child(3n+2) .card-icon,
+.feature-row:nth-child(3n+2) .icon {
+  background: linear-gradient(135deg, rgba(46,126,237,.22), rgba(46,126,237,.06));
+  color: var(--blue);
+}
+.grid-4 .card:nth-child(3n+3) .card-icon,
+.grid-3 .card:nth-child(3n+3) .card-icon,
+.feature-row:nth-child(3n+3) .icon {
+  background: linear-gradient(135deg, rgba(246,70,93,.22), rgba(246,70,93,.06));
+  color: var(--red);
+}
+
 /* Tables */
 .table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--glass-border); box-shadow: 0 12px 36px rgba(0,0,0,.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 table { width: 100%; border-collapse: collapse; background: rgba(13,16,22,.72); min-width: 640px; }
