@@ -1,4 +1,4 @@
-/* ZE Prototype interactions: mobile menu, modals, tabs, accordion, lang hints */
+/* Zebit Prototype interactions: mobile menu, modals, tabs, accordion, lang hints */
 (function () {
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
@@ -161,5 +161,5 @@
   });
 
   /* Console signature */
-  console.log('%c ZE Prototype ', 'background:#f0b90b;color:#0b0e11;padding:4px 8px;border-radius:4px;font-weight:700');
+  console.log('%c Zebit Prototype ', 'background:#D8B56A;color:#0B1020;padding:4px 8px;border-radius:4px;font-weight:700');
 })();
