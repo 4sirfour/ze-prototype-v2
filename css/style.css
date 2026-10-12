@@ -162,21 +162,32 @@ ul { list-style: none; }
 }
 /* Hero colour blocks — iso-metric CUBES (mirrors the logo's cube mark).
    Each cube is 3 faces (top = lit, left = mid, right = shade) drawn as SVG polygons
-   on a true 30-degree isometric grid, filled with translucent brand colour and a
-   1px brand edge line. Cubes are oversized and cropped by the viewport edges. */
+   on a true 30-degree isometric grid. Faces carry multi-stop translucent gradients
+   and the edges use gradient strokes, so light reads as travelling across each cube.
+   Three layers: solid cubes cropped by the left/right viewport edges, and a pair of
+   very faint giants across the middle whose gradients dissolve to fully transparent
+   (they fade away before reaching the far edge). */
 .hero-decor { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .hero-cubes { position: absolute; top: 0; width: 460px; height: 720px; display: block; z-index: 0; }
 .hc-left  { left: 0;  transform-origin: top left; }
+.hc-mid   { left: 50%; transform: translateX(-50%); transform-origin: top center; }
 .hc-right { right: 0; transform-origin: top right; }
 .hero-cubes .cube { transition: opacity .3s ease; }
 .hero-cubes .cube-b1 { opacity: 1; }
 .hero-cubes .cube-b2 { opacity: .75; }   /* small depth cube, lower left */
 .hero-cubes .cube-g1 { opacity: 1; }
 .hero-cubes .cube-g2 { opacity: .9; }    /* small brand cube, top right */
+.hero-cubes .cube-m1 { opacity: 1; }     /* faint giant, top centre */
+.hero-cubes .cube-m2 { opacity: .85; }   /* faint giant, lower centre */
+.hero-cubes .cube-m3 { opacity: .8; }    /* faint giant, gold cast behind card */
 
 .hero > .container { position: relative; z-index: 1; }
 .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .hero h1 { font-size: 3.2rem; line-height: 1.12; font-weight: 800; margin-bottom: 20px; color: var(--text); letter-spacing: -0.03em; }
+/* English hero headline runs longer than the Chinese one at the same size, so cap
+   the column and step the type down a notch — it then wraps as a balanced pair of
+   lines ("Digital assets," / "beyond trading.") instead of orphaning the last word. */
+html[lang="en"] .hero h1 { font-size: 2.95rem; max-width: 15ch; }
 .hero h1 .gold {
   background: linear-gradient(135deg, var(--gold-3) 0%, var(--gold) 50%, var(--gold-2) 100%);
   -webkit-background-clip: text; background-clip: text;
@@ -215,6 +226,63 @@ ul { list-style: none; }
 .hero-card select:hover, .hero-card input:hover { border-color: rgba(56, 107, 219, 0.4); }
 .hero-card select:focus, .hero-card input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(56, 107, 219, 0.18); background: var(--bg-1); }
 .hero-card .hint { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+/* --- Hero App download card (replaces the quick-buy panel) -----------------
+   Layout: mini phone mock-up on the left, value prop + store badges on the
+   right. Reuses the glassy card shell above for visual continuity. */
+.app-card { display: flex; flex-direction: column; gap: 18px; }
+.app-card-head h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em; }
+.app-card-head p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; }
+.app-card-body { display: flex; gap: 20px; align-items: stretch; min-height: 286px; }
+
+/* Mini phone mock-up — height follows the card body so it is never clipped */
+.mini-phone {
+  flex-shrink: 0; width: 138px; align-self: stretch;
+  background: linear-gradient(170deg, rgba(27, 38, 59, 0.9), rgba(11, 16, 32, 0.95));
+  border: 6px solid var(--bg-3); border-radius: 24px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); position: relative; overflow: hidden;
+}
+.mini-phone::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 52px; height: 12px; background: var(--bg-3); border-radius: 0 0 8px 8px; z-index: 2;
+}
+.mini-screen {
+  padding: 20px 11px 11px; height: 100%; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse 120% 46% at 50% 0%, rgba(216, 181, 106, 0.12), transparent 68%);
+}
+.mini-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.mini-logo { font-size: 0.68rem; font-weight: 800; color: var(--gold); }
+.mini-time { font-size: 0.6rem; color: var(--text-muted); }
+.mini-label { font-size: 0.58rem; color: var(--text-muted); }
+.mini-balance { font-size: 1.05rem; font-weight: 700; margin-bottom: 3px; }
+.mini-pnl { font-size: 0.6rem; font-weight: 600; margin-bottom: 10px; white-space: nowrap; }
+.mini-chart {
+  flex: 1; min-height: 44px; border-radius: 8px; margin-bottom: 10px;
+  background: linear-gradient(180deg, rgba(35, 192, 139, 0.28), rgba(35, 192, 139, 0.02));
+}
+.mini-list { display: flex; flex-direction: column; gap: 6px; }
+.mini-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.58rem; white-space: nowrap; }
+.mini-row .n { font-weight: 600; flex-shrink: 0; }
+.mini-row .p { color: var(--text-muted); margin-left: auto; margin-right: 6px; }
+
+/* Value props + store badges */
+.app-card-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.app-perks { display: flex; flex-direction: column; gap: 8px; }
+.app-perk { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.35; }
+.app-perk svg { flex-shrink: 0; margin-top: 1px; color: var(--blue-text); }
+.store-badges { display: flex; flex-direction: column; gap: 9px; margin-top: auto; }
+.store-btn {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 8px 14px; min-height: 44px; box-sizing: border-box;
+  background: var(--bg-2); border: 1px solid var(--bg-3); border-radius: var(--radius);
+  color: var(--text); text-decoration: none; transition: background .2s, border-color .2s, transform .2s;
+}
+.store-btn:hover { background: var(--bg-3); border-color: rgba(216, 181, 106, 0.5); transform: translateY(-1px); }
+.store-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.store-btn svg { flex-shrink: 0; }
+.store-btn .txt { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.store-btn .txt small { font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.02em; }
+.store-btn .txt strong { font-size: 0.86rem; font-weight: 700; white-space: nowrap; }
 
 /* Sections */
 .section { padding: 96px 0; position: relative; }
@@ -588,6 +656,9 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .hero h1 { font-size: 2.2rem; }
   .hero-decor { opacity: .95; }
   .hero-cubes { transform: scale(.75); }
+  .hc-left  { transform-origin: center left; }
+  .hc-mid   { left: 58%; transform: translateX(-50%) scale(.75); transform-origin: top center; }
+  .hc-right { transform-origin: center right; }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .section { padding: 56px 0; }
@@ -602,6 +673,7 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .grid-4 { grid-template-columns: 1fr; }
   .hero h1 { font-size: 1.9rem; }
   .hero-cubes { transform: scale(.55); }
+  .hc-mid { transform: translateX(-50%) scale(.55); }
   .hero-actions { flex-direction: column; }
   .btn { width: 100%; }
   .hero-badges { gap: 16px; }
@@ -619,6 +691,13 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .footer-col h4 { font-size: 0.85rem; margin-bottom: 8px; }
   .footer-col a { font-size: 0.8rem; margin-bottom: 6px; }
   .footer-bottom { font-size: 0.8rem; padding-top: 16px; }
+  /* App card stacks on narrow screens so the phone never squeezes the copy */
+  .app-card-body { flex-direction: column; align-items: center; gap: 18px; min-height: 0; }
+  .mini-phone { width: 150px; height: 300px; align-self: center; }
+  .app-card-info { width: 100%; }
+  .app-perks { gap: 10px; }
+  .store-badges { flex-direction: row; }
+  .store-btn { flex: 1; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
