@@ -195,10 +195,13 @@ html[lang="en"] .hero h1 { font-size: 2.95rem; max-width: 15ch; }
 .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 520px; margin-bottom: 32px; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 .hero-actions .btn { padding: 13px 26px; font-size: 1rem; }
-.hero-badges { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
-.hero-badges .item { text-align: center; }
-.hero-badges .num { font-size: 1.6rem; font-weight: 800; color: var(--gold); }
-.hero-badges .label { font-size: 0.85rem; color: var(--text-muted); }
+/* Hero — partner logos */
+.hero-partners { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+.hero-partners-label { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+.hero-partners-logos { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.hero-partners-logos a { display: inline-flex; align-items: center; opacity: .82; transition: opacity .2s ease, transform .2s ease; }
+.hero-partners-logos a:hover { opacity: 1; transform: translateY(-2px); }
+.hero-partners-logos img { height: 40px; width: auto; display: block; }
 
 .hero-card {
   background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
@@ -663,8 +666,8 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
   .hc-mid { transform: translateX(-50%) scale(.55); }
   .hero-actions { flex-direction: column; }
   .btn { width: 100%; }
-  .hero-badges { gap: 16px; }
-  .hero-badges .num { font-size: 1.3rem; }
+  .hero-partners-logos { gap: 20px; }
+  .hero-partners-logos img { height: 32px; }
   .logo img { height: 26px; }
   .logo { font-size: 1.12rem; }
   .card { padding: 22px; }
