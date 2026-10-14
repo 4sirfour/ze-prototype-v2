@@ -160,6 +160,48 @@
     if (href && href.endsWith(current)) a.classList.add('active');
   });
 
+  /* Floating support chat widget */
+  const chatFab = $('.chat-fab');
+  const chatPanel = $('.chat-panel');
+  if (chatFab && chatPanel) {
+    const setChat = (open) => {
+      chatPanel.classList.toggle('open', open);
+      chatFab.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    chatFab.addEventListener('click', () => setChat(!chatPanel.classList.contains('open')));
+    const chatClose = $('.chat-close');
+    if (chatClose) chatClose.addEventListener('click', () => setChat(false));
+    document.addEventListener('click', e => {
+      if (chatPanel.classList.contains('open') && !chatPanel.contains(e.target) && !chatFab.contains(e.target)) setChat(false);
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setChat(false); });
+
+    /* mock conversation */
+    const chatForm = $('.chat-input-row');
+    const chatInput = $('#chat-input');
+    const chatLog = $('.chat-log');
+    if (chatForm && chatInput && chatLog) {
+      chatForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const v = chatInput.value.trim();
+        if (!v) return;
+        const msg = document.createElement('div');
+        msg.className = 'chat-msg user';
+        msg.textContent = v;
+        chatLog.appendChild(msg);
+        chatInput.value = '';
+        chatLog.scrollTop = chatLog.scrollHeight;
+        setTimeout(() => {
+          const reply = document.createElement('div');
+          reply.className = 'chat-msg bot';
+          reply.textContent = chatLog.getAttribute('data-reply') || 'Thanks! Our team will reply shortly.';
+          chatLog.appendChild(reply);
+          chatLog.scrollTop = chatLog.scrollHeight;
+        }, 700);
+      });
+    }
+  }
+
   /* Console signature */
   console.log('%c Zebit Prototype ', 'background:#D8B56A;color:#0B1020;padding:4px 8px;border-radius:4px;font-weight:700');
 })();
