@@ -731,3 +731,13 @@ tbody tr:hover { background: rgba(56, 107, 219, 0.07); }
 
 /* Chat widget wrapper (no visual impact) */
 .chat-widget { display: contents; }
+
+/* ===== Back to top ===== */
+.to-top { position: fixed; right: 24px; bottom: 92px; z-index: 70; width: 44px; height: 44px; border-radius: 50%; background: var(--bg-1); border: 1px solid var(--bg-3); color: var(--text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 22px rgba(0,0,0,.3); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s, color .2s, border-color .2s; }
+.to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { color: var(--gold); border-color: rgba(216,181,106,.5); }
+.to-top:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+@media (max-width: 640px) {
+  .to-top { right: 12px; bottom: 62px; width: 40px; height: 40px; }
+}

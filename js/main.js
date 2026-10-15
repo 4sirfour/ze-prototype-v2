@@ -202,6 +202,18 @@
     }
   }
 
+  /* Back to top */
+  const toTop = $('.to-top');
+  if (toTop) {
+    const onScroll = () => toTop.classList.toggle('show', window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener('click', () => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+
   /* Console signature */
   console.log('%c Zebit Prototype ', 'background:#D8B56A;color:#0B1020;padding:4px 8px;border-radius:4px;font-weight:700');
 })();
