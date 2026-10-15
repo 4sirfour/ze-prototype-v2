@@ -197,7 +197,6 @@ html[lang="en"] .hero h1 { font-size: 2.95rem; max-width: 15ch; }
 .hero-actions .btn { padding: 13px 26px; font-size: 1rem; }
 /* Hero — partner logos */
 .hero-partners { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
-.hero-partners-label { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
 .hero-partners-logos { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
 .hero-partners-logos .partner-item { display: inline-flex; align-items: center; opacity: .82; transition: opacity .2s ease, transform .2s ease; }
 .hero-partners-logos .partner-item:hover { opacity: 1; transform: translateY(-2px); }
